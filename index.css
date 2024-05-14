@@ -1,0 +1,19 @@
+.banner {
+  color: #242424;
+  padding: 10px;
+	position: fixed;
+  top: 0px;
+  z-index: 100000000;
+  width: 100%;
+  text-align: center;
+  height: 45px;
+}
+
+.banner a {
+	text-decoration: underline;
+  color: #242424;
+}
+
+body {
+ margin-top: 45px; 
+}
