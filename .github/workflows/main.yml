@@ -1,0 +1,53 @@
+name: Deploy to Optimizely
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Optimizely
+        env:
+          OPTIMIZELY_EXTENSION_ID: ${{ secrets.OPTIMIZELY_EXTENSION_ID }}
+          OPTIMIZELY_API_KEY: ${{ secrets.OPTIMIZELY_API_KEY }}
+        run: |
+          # Get the content of index.html, index.css, and index.js
+          html=$(cat index.html)
+          css=$(cat index.css)
+          js=$(cat index.js)
+          
+          # Prepare JSON payload
+          payload=$(cat <<EOF
+{
+  "archived": true,
+  "description": "Your description here",
+  "edit_url": "https://example.com/edit",
+  "enabled": true,
+  "fields": [
+    {
+      "api_name": "text",
+      "default_value": "$html",
+      "field_type": "text",
+      "label": "A text field"
+    }
+  ],
+  "implementation": {
+    "apply_js": "$js",
+    "css": "$css",
+    "html": "$html",
+    "reset_js": ""
+  },
+  "name": "My Extension"
+}
+EOF
+)
+
+          # Make POST request to Optimizely API
+          curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $OPTIMIZELY_API_KEY" -d "$payload" "https://api.optimizely.com/v2/extensions/${OPTIMIZELY_EXTENSION_ID}"
