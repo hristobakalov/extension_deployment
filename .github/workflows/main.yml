@@ -14,16 +14,11 @@ jobs:
           OPTIMIZELY_EXTENSION_ID: '${{ secrets.OPTIMIZELY_EXTENSION_ID }}'
           OPTIMIZELY_API_KEY: '${{ secrets.OPTIMIZELY_API_KEY }}'
         run: >
-          # Get the content of index.html, index.css, and index.js
-
           html=$(cat index.html)
           echo '"'$html'"'
           css=$(cat index.css)
 
           js=$(cat index.js)
-
-
-          # Prepare JSON payload
 
           echo '{
             "archived": false,
@@ -39,15 +34,10 @@ jobs:
             "implementation": {
               "apply_js": "'"$js"'",
               "css": "'"$css"'",
-              "html": "'"$html"'",
+              "html": "'"$html"'", 
               "reset_js": ""
             }
           }' > payload.json
-
-          # Print the contents of payload.json
           echo payload.json
           
-          # Make POST request to Optimizely API
-          curl -X PATCH -H "Content-Type: application/json" -H "Authorization:
-          Bearer $OPTIMIZELY_API_KEY" -d "@payload.json"
-          "https://api.optimizely.com/v2/extensions/${OPTIMIZELY_EXTENSION_ID}"
+          curl -X PATCH -H "Content-Type: application/json" -H "Authorization:Bearer $OPTIMIZELY_API_KEY" -d "@payload.json" "https://api.optimizely.com/v2/extensions/${OPTIMIZELY_EXTENSION_ID}"
