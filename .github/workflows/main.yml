@@ -25,7 +25,7 @@ jobs:
 
           # Prepare JSON payload
 
-          payload=$(cat <<EOF
+          payload=$(cat <<EOF>>
             {
               "archived": true,
               "description": "Your description here",
@@ -47,7 +47,7 @@ jobs:
               },
               "name": "My Extension"
             }
-            EOF)
+            EOF
           echo "$payload" > payload.json  # Save payload to a file
 
 
