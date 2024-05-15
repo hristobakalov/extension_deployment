@@ -14,13 +14,13 @@ jobs:
           OPTIMIZELY_EXTENSION_ID: '${{ secrets.OPTIMIZELY_EXTENSION_ID }}'
           OPTIMIZELY_API_KEY: '${{ secrets.OPTIMIZELY_API_KEY }}'
         run: >
-          html=$(cat index.html)
+          $html=$(cat index.html)
          
-          css=$(cat index.css)
+          $css=$(cat index.css)
 
-          js=$(cat index.js)
+          $js=$(cat index.js)
 
-          json='{
+          $json='{
             "archived": false,
             "enabled": true,
             "fields": [
@@ -40,4 +40,4 @@ jobs:
           }'
           echo $json
           
-          curl -X PATCH -H "Content-Type: application/json" -H "Authorization:Bearer $OPTIMIZELY_API_KEY" -d "$json" "https://api.optimizely.com/v2/extensions/${OPTIMIZELY_EXTENSION_ID}"
+          curl -X PATCH -H "Content-Type: application/json" -H "Authorization:Bearer $OPTIMIZELY_API_KEY" -d "$json" "https://api.optimizely.com/v2/extensions/$OPTIMIZELY_EXTENSION_ID"
