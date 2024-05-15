@@ -49,6 +49,6 @@ jobs:
           
           # Make POST request to Optimizely API
 
-          curl -X POST -H "Content-Type: application/json" -H "Authorization:
+          curl -X PATCH -H "Content-Type: application/json" -H "Authorization:
           Bearer $OPTIMIZELY_API_KEY" -d "@payload.json"
           "https://api.optimizely.com/v2/extensions/${OPTIMIZELY_EXTENSION_ID}"
