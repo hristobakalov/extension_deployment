@@ -17,7 +17,8 @@ jobs:
           # Get the content of index.html, index.css, and index.js
 
           html=$(cat index.html)
-
+          # print the html file
+          echo "$html"
           css=$(cat index.css)
 
           js=$(cat index.js)
