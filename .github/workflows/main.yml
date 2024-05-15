@@ -25,32 +25,28 @@ jobs:
 
           # Prepare JSON payload
 
-          payload=$(cat <<EOF>>
-            {
-              "archived": true,
-              "description": "Your description here",
-              "edit_url": "https://example.com/edit",
-              "enabled": true,
-              "fields": [
-                {
-                  "api_name": "text",
-                  "default_value": "$html",
-                  "field_type": "text",
-                  "label": "A text field"
-                }
-              ],
-              "implementation": {
-                "apply_js": "$js",
-                "css": "$css",
-                "html": "$html",
-                "reset_js": ""
-              },
-              "name": "My Extension"
-            }
-            EOF
-          echo "$payload" > payload.json  # Save payload to a file
-
-
+          echo '{
+            "archived": true,
+            "description": "Your description here",
+            "edit_url": "https://example.com/edit",
+            "enabled": true,
+            "fields": [
+              {
+                "api_name": "text",
+                "default_value": "'"$html"'",
+                "field_type": "text",
+                "label": "A text field"
+              }
+            ],
+            "implementation": {
+              "apply_js": "'"$js"'",
+              "css": "'"$css"'",
+              "html": "'"$html"'",
+              "reset_js": ""
+            },
+            "name": "My Extension"
+          }' > payload.json
+          
           # Make POST request to Optimizely API
 
           curl -X POST -H "Content-Type: application/json" -H "Authorization:
