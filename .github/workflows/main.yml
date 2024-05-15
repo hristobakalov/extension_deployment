@@ -26,9 +26,7 @@ jobs:
           # Prepare JSON payload
 
           echo '{
-            "archived": true,
-            "description": "Your description here",
-            "edit_url": "https://example.com/edit",
+            "archived": false,
             "enabled": true,
             "fields": [
               {
@@ -43,8 +41,7 @@ jobs:
               "css": "'"$css"'",
               "html": "'"$html"'",
               "reset_js": ""
-            },
-            "name": "My Extension"
+            }
           }' > payload.json
 
           # Print the contents of payload.json
