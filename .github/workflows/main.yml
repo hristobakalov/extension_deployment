@@ -23,14 +23,6 @@ jobs:
           $json='{
             "archived": false,
             "enabled": true,
-            "fields": [
-              {
-                "api_name": "text",
-                "default_value": "'"$html"'",
-                "field_type": "text",
-                "label": "A text field"
-              }
-            ],
             "implementation": {
               "apply_js": "'"$js"'",
               "css": "'"$css"'",
@@ -38,6 +30,5 @@ jobs:
               "reset_js": ""
             }
           }'
-          echo "$json"
           
           curl -X PATCH -H "Content-Type: application/json" -H "Authorization: bearer $OPTIMIZELY_API_KEY" -d "$json" "https://api.optimizely.com/v2/extensions/$OPTIMIZELY_EXTENSION_ID"
